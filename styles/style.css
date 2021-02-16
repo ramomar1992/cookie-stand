@@ -81,7 +81,7 @@ main img {
     margin: 15px;
 }
 main section:first-child img{
-    height: 450px;
+    height: 400px;
     width: 465px;
 }
 main section:nth-child(2) img {
