@@ -9,7 +9,7 @@ body {
 
 header {
     width: 100%;
-    min-height: 110px;
+    min-height: 125px;
     background-color: #444;
     display: flex;
     justify-content: center;
@@ -18,16 +18,22 @@ header {
 
 header section {
     display: inline-block;
+    text-align: center;
 }
 
 header section:first-child {
-    max-height: fit-content;
+    min-height: fit-content;
+    height: 120px;
+    border-radius: 40%;
+    min-width: 250PX;
+    background-color: rgb(112, 111, 111);
     /* margin-left: 3rem;
     margin-top:20px; */
 }
 header section:first-child img{
     width: 200px;
     height: 70px;
+    margin-top: 10px;
 }
 
 header section:last-child {
@@ -69,6 +75,9 @@ header section nav ul li a:hover {
 header section h4 {
     color: salmon;
     font-size: smaller;
+    width: 100%;
+    text-align: center;
+    font-family: 'Hachi Maru Pop', cursive;
 }
 main {
     width: fit-content;
@@ -211,7 +220,17 @@ table {
 td, th{
     border: 2px solid black;     
     padding: 10px;
+    background-color: rgba(247, 148, 137, 0.863);
     
+}
+th{
+    background-color: springgreen;
+}
+td:hover{
+    background-color: wheat;
+}
+th:hover{
+    background-color: wheat;
 }
 table {
     margin-top: 5rem;
