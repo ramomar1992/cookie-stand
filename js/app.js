@@ -1,12 +1,13 @@
 'use strict';
+let branchesLocation = [];
+let hoursPerDay = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 
 function ShopBranch(name, minCus, maxCus, avgCookie) {
     this.branchLocation = name;
     this.minCustomers = minCus;
     this.maxCustomers = maxCus;
     this.avgCookies = avgCookie;
-    this.hoursPerDay = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
-
+    branchesLocation.push(this);
 }
 
 ShopBranch.prototype.getRandomNum = function () {
@@ -15,7 +16,7 @@ ShopBranch.prototype.getRandomNum = function () {
 
 ShopBranch.prototype.generateCookiesPerHour = function () {
     let ret = [];
-    for (let i = 0; i < this.hoursPerDay.length; i++) {
+    for (let i = 0; i < hoursPerDay.length; i++) {
         ret.push(Math.floor(this.getRandomNum() * this.avgCookies));
     }
     this.cookiesPerHour = ret;
@@ -51,8 +52,8 @@ ShopBranch.prototype.render = function (parentTableBody) {
     parentTableBody.appendChild(tableRow);
 }
 
-function createTableHead(branch) {
-    let parent = document.querySelector('body');
+function createTableHead() {
+    let parent = document.getElementById('shopsTable');
     let table = document.createElement('table');
     let tableHead = document.createElement('thead');
     let tableHeadRow = document.createElement('tr')
@@ -60,9 +61,9 @@ function createTableHead(branch) {
     let tableText = document.createTextNode(`Hours`);
     tableHeader.appendChild(tableText);
     tableHeadRow.appendChild(tableHeader);
-    for (let i = 0; i < branch.hoursPerDay.length; i++) {
+    for (let i = 0; i < hoursPerDay.length; i++) {
         tableHeader = document.createElement('th');
-        tableText = document.createTextNode(`${branch.hoursPerDay[i]}`);
+        tableText = document.createTextNode(`${hoursPerDay[i]}`);
         tableHeader.appendChild(tableText);
         tableHeadRow.appendChild(tableHeader);
     }
@@ -76,7 +77,7 @@ function createTableHead(branch) {
     return table;
 }
 
-function createTableFoot(parentTable, branch) {
+function createTableFoot(parentTable ) {
     let tableFoot = document.createElement('tfoot');
     let tableFootRow = document.createElement('tr')
     let tableHeader = document.createElement('th');
@@ -84,14 +85,14 @@ function createTableFoot(parentTable, branch) {
     tableHeader.appendChild(tableText);
     tableFootRow.appendChild(tableHeader);
     let allBranchTotalEachHour = [];
-    for (let i = 0; i < branch.hoursPerDay.length; i++) {
+    for (let i = 0; i < hoursPerDay.length; i++) {
         let totalPerHour = 0;
         for (let j = 0; j < branchesLocation.length; j++) {
             totalPerHour += branchesLocation[j].cookiesPerHour[i];
         }
         allBranchTotalEachHour.push(totalPerHour);
     }
-    for (let i = 0; i < branch.hoursPerDay.length; i++) {
+    for (let i = 0; i < hoursPerDay.length; i++) {
         tableHeader = document.createElement('th');
         tableText = document.createTextNode(`${allBranchTotalEachHour[i]}`);
         tableHeader.appendChild(tableText);
@@ -109,15 +110,41 @@ function createTableFoot(parentTable, branch) {
     parentTable.appendChild(tableFoot);
 
 }
-
-
 let seattle = new ShopBranch('Seattle', 23, 65, 6.5);
 let tokyo = new ShopBranch('Tokyo', 3, 24, 1.2);
 let dubai = new ShopBranch('Dubai', 11, 38, 3.7);
 let paris = new ShopBranch('Paris', 20, 35, 2.3);
 let lima = new ShopBranch('Lima', 2, 16, 4.6);
 
-let branchesLocation = [seattle, dubai, tokyo, paris, lima];
+
+let tableParent = createTableHead(seattle);
+let parentTableBody = tableParent.appendChild(document.createElement('tbody'));
+for (let i = 0; i < branchesLocation.length; i++) {
+    branchesLocation[i].generateCookiesPerHour();
+    branchesLocation[i].calcTotalCookies();
+    branchesLocation[i].render(parentTableBody);
+}
+createTableFoot(tableParent);
+
+let newShop = document.getElementById('addShop');
+newShop.addEventListener('submit',submitter);
+function submitter(e) {
+    e.preventDefault();
+    let elName = e.target.locationName.value;
+    let elMin = Number (e.target.minCus.value);
+    let elMax =Number (e.target.maxCus.value);
+    let elAvg = parseFloat (e.target.avgCookies.value);
+    let newBranch = new ShopBranch(elName, elMin, elMax, elAvg);
+    newShop.reset();
+    tableParent.deleteTFoot();
+    branchesLocation[branchesLocation.length - 1].generateCookiesPerHour();
+    branchesLocation[branchesLocation.length - 1].calcTotalCookies();
+    branchesLocation[branchesLocation.length -1].render(parentTableBody);
+    createTableFoot(tableParent);
+    
+}
+
+
 // for (let i = 0; i < branchesLocation.length; i++){
 //     branchesLocation[i].generateCookiesPerHour();
 //     branchesLocation[i].calcTotalCookies();
@@ -125,7 +152,7 @@ let branchesLocation = [seattle, dubai, tokyo, paris, lima];
 //     let headEl = document.createElement('h2');
 //     headEl.appendChild(document.createTextNode(`Branch Location: ${branchesLocation[i].branchLocation}`));
 //     parent.appendChild(headEl);
-//     let listEl = document.createElement('ul');
+//     let listEl = document.createElement('ul');   
 //     parent.appendChild(listEl);
 //     for (let j = 0; j < branchesLocation[i].hoursPerDay.length; j++) {
 //         let listItem = document.createElement("li"); // Create a <li> node
@@ -135,11 +162,3 @@ let branchesLocation = [seattle, dubai, tokyo, paris, lima];
 //     }
 //     listEl.appendChild(document.createElement('li').appendChild(document.createTextNode(`Total: ${branchesLocation[i].totalCookies} cookies.`)));
 // }
-let tableParent = createTableHead(seattle);
-let parentTableBody = tableParent.appendChild(document.createElement('tbody'));
-for (let i = 0; i < branchesLocation.length; i++) {
-    branchesLocation[i].generateCookiesPerHour();
-    branchesLocation[i].calcTotalCookies();
-    branchesLocation[i].render(parentTableBody);
-}
-createTableFoot(tableParent, seattle);

@@ -232,19 +232,9 @@ td:hover{
 th:hover{
     background-color: wheat;
 }
-table {
-    margin-top: 5rem;
-    margin-left: 2rem;
-}
-table+a {
-        display: block;
-        margin: 5rem 0;
-        text-align: center;
-        color: darksalmon;
-}
-table+a:hover{
-    color: deeppink;
-}
+
+
+
 h1.sales-header{
     margin-top: 3rem;
     font-size: xx-large;
@@ -253,4 +243,39 @@ h1.sales-header{
 h1.sales-header, h2.sales-header {
     width: 100%;
     text-align: center;
+}
+#shopsTable{
+    /* background-color: white; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10rem;
+}
+form{
+    width: fit-content;
+}
+
+fieldset{
+    /* background-color: violet; */
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+}
+label{
+    margin-bottom:5px ;
+}
+#maxCus,
+#minCus,
+#avgCookies,
+#locationName{
+    border-radius: 50%;
+    text-align: center;
+    width: 300px;
+    height: 50px;
+}
+#goHome{
+    display: inline-block;
+    margin-bottom: 5rem;
+    margin-left: 45%;
 }
