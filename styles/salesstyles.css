@@ -1,0 +1,175 @@
+table {
+    border: 1px solid green;
+}
+
+td,
+th {
+    border: 2px solid black;
+    padding: 10px;
+    background-color: rgba(247, 148, 137, 0.863);
+
+}
+
+th {
+    font-weight: BOLD;
+
+    background-color: springgreen;
+}
+
+td:hover {
+    background-color: wheat;
+    font-size: 140%;
+    position: relative;
+    max-height:200%;
+    width:7rem;
+    transition:275ms;
+    /* right: 2%; */
+}
+
+th:hover {
+
+    background-color: wheat;
+}
+
+
+
+h1.sales-header {
+    margin-top: 3rem;
+    font-size: xx-large;
+    font-weight: bolder;
+    margin-bottom: 5rem;
+}
+
+h1.sales-header,
+h2.sales-header {
+    width: 100%;
+    text-align: center;
+}
+
+#shopsTable {
+    /* background-color: white; */
+    /* overflow-x: scroll; */
+    width: 100%;
+    margin-bottom: 10rem;
+    display: flex; 
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+     
+}
+
+form {
+    width: 50%;
+    text-align: center;
+}
+
+fieldset {
+    /* background-color: violet; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+#maxCus,
+#minCus,
+#avgCookies,
+#locationName {
+    border-radius: 50%;
+    text-align: center;
+    width: 300px;
+    height: 50px;
+    background-color: cornflowerblue;
+    color: rgb(0, 255, 0);
+    font-weight: 600;
+    font-size: 1.3rem;
+}
+
+#goHome {
+    display: inline-block;
+    margin-bottom: 5rem;
+    margin-left: 45%;
+}
+
+#reset,
+#submit {
+    font-size: xx-large;
+    height: 3rem;
+    width: 20rem;
+    border-radius: 50px;
+    margin-top: 15px;
+
+}
+
+body.any {
+    display: flex !important;
+    justify-content: content !important;
+    flex-direction: column !important;
+}
+
+/* #reset:focus,
+#submit:focus{
+    background-color: orangered;
+} */
+#reset:active,
+#submit:active {
+    background-color: orangered;
+}
+
+fieldset section {
+    display: flex;
+    /* background-color:red; */
+    width: 60%;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+#tableSections {
+    max-width: 100%;
+    display: flex;
+    padding:1rem;
+    font-size:40%;
+    font-weight:800;
+    /* justify-content: center; */
+    text-align: center;
+    /* overflow-x: scroll; */
+}
+
+.Day {
+    max-width: 80%;
+    /* font-size: 50%; */
+    padding:1rem;
+}
+/* .Employee {
+    margin: 15px;
+    width: 80%;
+    font-size: 50%;
+    overflow: scroll;
+    overflow-x: hidden;
+    padding-left: 10%;
+}
+
+
+
+body.any * {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+body.any section {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+body.any section * {
+    margin: 0 !important;
+    padding: 0 !important;
+} */
