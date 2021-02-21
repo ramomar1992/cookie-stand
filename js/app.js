@@ -117,16 +117,16 @@ function createTableFoot(parentTable ,str, type) {
     let tableText = document.createTextNode(`${str}`);
     tableHeader.appendChild(tableText);
     tableFootRow.appendChild(tableHeader);
-let allBranchTotalEachHour = [];
-    let some;
+    let allBranchTotalEachHour = [];
+    let some=0;
     for (let i = 0; i < hoursPerDay.length; i++) {
         let totalPerHour = 0;
         for (let j = 0; j < branchesLocation.length; j++) {
-            if (type = 'emp') {
+            if (type == 'emp') {
                 totalPerHour += branchesLocation[j].employeesPerHour[i];
-            } else if(type = 'sales'){
+            } else if(type == 'sales'){
                 
-                totalPerHour += branchesLocation[j].some[i];
+                totalPerHour += branchesLocation[j].cookiesPerHour[i];
             }
         }
         allBranchTotalEachHour.push(totalPerHour);
